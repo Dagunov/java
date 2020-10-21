@@ -11,7 +11,11 @@ class l1{
         GREEN,
         PURPLE,
         YELLOW,
-        ORANGE
+        ORANGE;
+        @Override
+        public String toString(){
+            return "White, blue, green, purple, yellow, orange";
+        }
     }
 
     enum Nominal{
@@ -58,34 +62,49 @@ class l1{
         }
     }
 
-    abstract static class Card{
-        private String title;
+    interface Printable{
+        void printInfo();
+    }
+
+    abstract static class Card implements Printable{
+        protected String title;
         private String description;
         private String effect;
-        Card(String t, String d, String e){
+
+        Card(String t, String d, String e) {
             title = t;
             description = d;
             effect = e;
         }
-        public String getTitle(){
+
+        public String getTitle() {
             return title;
         }
-        public String getDescription(){
+
+        public String getDescription() {
             return description;
         }
-        public String getEffect(){
+
+        public String getEffect() {
             return effect;
         }
+
         public abstract void printInfo();
+
         public abstract void action();
     }
 
-    static class Monopoly{
+    static class Monopoly {
         private NotRealBank bank;
         private Random rnd;
-        class ChanceCard extends Card{
-            ChanceCard(String t, String d, String e){
+
+        class ChanceCard extends Card {
+            ChanceCard(String t, String d, String e) {
                 super(t, d, e);
+            }
+            @Override
+            public String getTitle() {
+                return "\"" + title + "\"";
             }
             public void printInfo(){
                 System.out.println("Your chance is here!\n" + getTitle() + "\n" + getDescription());
@@ -97,10 +116,12 @@ class l1{
         class PropertyCard extends Card{
             private Integer price;
             private Integer gain;
+            private StringBuilder owner;
             PropertyCard(String t, String d, String e, Integer price, Integer gain){
                 super(t, d, e);
                 this.price = price;
                 this.gain = gain;
+                owner = new StringBuilder();
             }
             public void printInfo(){
                 System.out.println("This is the property:\n" + getTitle() + "\n" + getDescription());
@@ -175,6 +196,7 @@ class l1{
 
 
     public static void main(String[] args){
+        System.out.println("There are next colors: " + Color.BLUE);
         Monopoly game = new Monopoly();
         System.out.println("Lets start with all available Chances:");
         game.getAvailableChances();
@@ -186,5 +208,6 @@ class l1{
         game.getRandomProperty();
         System.out.println("What about banknotes in the Bank?");
         game.getBank().showBank();
+        
     }
 }
