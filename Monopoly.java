@@ -13,6 +13,9 @@ public class Monopoly {
         ChanceCard(String t, String d, String e) {
             super(t, d, e);
         }
+        ChanceCard(){
+            super("", "", "");
+        }
         @Override
         public String getTitle() {
             return "\"" + title + "\"";
@@ -33,6 +36,9 @@ public class Monopoly {
             this.price = price;
             this.gain = gain;
             owner = new StringBuilder();
+        }
+        PropertyCard(){
+            super("", "", "");
         }
         public void printInfo(){
             System.out.println("This is the property:\n" + getTitle() + "\n" + getDescription());
