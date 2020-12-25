@@ -11,7 +11,7 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PlayerTest {
+public class PlayerIT {
     @Mock
     private PropertyCard propertyCard;
     @Mock
